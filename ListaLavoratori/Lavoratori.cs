@@ -32,6 +32,7 @@ namespace ListaLavoratori
         public int AnniServizio { get; set; }
         public int StipendioMensile { get; set; }
         public int Mensilità { get; set; }
+        public int RAL { get; set; }
         public Lavoratori()
         {
 
@@ -40,7 +41,8 @@ namespace ListaLavoratori
         {
             return DateTime.Now.Year - start.Year;
         }
-        public Lavoratori(string nome, string cognome, DateTime nascita, Genere genere, TitoloDiStudio titolo, DateTime assunzione, int stipMensile, int mensilità)
+        public Lavoratori(string nome, string cognome, DateTime nascita, Genere genere, TitoloDiStudio titolo, DateTime assunzione, 
+            int stipMensile, int mensilità)
         {
             Nome = nome;
             Cognome = cognome;
@@ -52,6 +54,83 @@ namespace ListaLavoratori
             Titolo = titolo;
             StipendioMensile = stipMensile;
             Mensilità = mensilità;
+            RAL = StipendioMensile * Mensilità;
+        }
+        public DateTime InserisciData()
+        {
+            Console.WriteLine("Giorno");
+            int gg = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Mese");
+            int mm = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Anno");
+            int aa = Int32.Parse(Console.ReadLine());
+
+            DateTime data = new DateTime(aa, mm, gg);
+            return data;
+        }
+        public Lavoratori InsertWorker(Lavoratori worker)
+        {
+            int scelta = 0;
+            Console.WriteLine("Nome: ");
+            worker.Nome = Console.ReadLine();
+            Console.WriteLine("Cognome: ");
+            worker.Cognome = Console.ReadLine();
+            Console.WriteLine("Genere (0 per Maschio, 1 per femmina, 2 per Gender): ");
+            scelta = Int32.Parse(Console.ReadLine());
+            if(scelta == 0)
+            {
+                worker.Sesso = Genere.M;
+            }
+            else if (scelta == 1)
+            {
+                worker.Sesso = Genere.F;
+            }
+            else if (scelta == 2)
+            {
+                worker.Sesso = Genere.G;
+            }
+            Console.WriteLine("Titolo di Studio \n " +
+                "(0 per Licenza Elementare, 1 per Licenza Media, 2 per Diploma Superiore, 3 per Laurea, 4 per Dottorato): ");
+            scelta = Int32.Parse(Console.ReadLine());
+            if (scelta == 0)
+            {
+                worker.Titolo = TitoloDiStudio.LicenzaElementare;
+            }
+            else if (scelta == 1)
+            {
+                worker.Titolo = TitoloDiStudio.LicenzaMedia;
+            }
+            else if (scelta == 2)
+            {
+                worker.Titolo = TitoloDiStudio.DiplomaSuperiore;
+            }
+            else if (scelta == 3)
+            {
+                worker.Titolo = TitoloDiStudio.Laurea;
+            }
+            else if (scelta == 4)
+            {
+                worker.Titolo = TitoloDiStudio.Dottorato;
+            }
+            Console.WriteLine("Data di nascita: ");
+            worker.DataDiNascita = InserisciData();
+            Console.WriteLine("Data di assunzione: ");
+            worker.DataAssunzione = InserisciData();
+            Console.WriteLine("Mensilità: ");
+            worker.Mensilità = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Stipendio Mensile: ");
+            worker.StipendioMensile = Int32.Parse(Console.ReadLine());
+
+            Lavoratori lavoratore = new Lavoratori(worker.Nome, worker.Cognome, worker.DataDiNascita, worker.Sesso,worker.Titolo,
+                worker.DataAssunzione, worker.StipendioMensile, worker.Mensilità);
+
+            return lavoratore;
+        }
+        public override string ToString()
+        {
+            return string.Format("Nome: {0} \n Cognome: {1} \n Genere: {2} \n Età: {3} \n Data di Nascita: {4:d} \n " +
+                "Anni di servizio: {5} \n Data assunzione: {6} \n Stipendio Mensile: {7} \n Mensilità: {8} \n ",
+                Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità);
         }
     }
 }
