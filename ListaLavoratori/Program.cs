@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ListaLavoratori
 {
     class Program
     {
+        private static object listSerializer;
+
         static void Main(string[] args)
         {
             List<Lavoratori> listL = new List<Lavoratori>();
@@ -44,16 +45,26 @@ namespace ListaLavoratori
             for(int i = 0; i<quantita; i++)
             {
                 Lavoratori lavoratore = new Lavoratori();
-                lavoratore.InsertWorker(lavoratore);
+                var lav = lavoratore.InsertWorker(lavoratore);
                 listL.Add(lavoratore);
             }
-
-            foreach(var w in listL)
+            StringBuilder sl = new StringBuilder();
+            foreach (var p in listL)
             {
-                
+                sl.AppendLine(p.ToString());
             }
-            
-            
+            File.WriteAllText(fullpath, sl.ToString());
+
+            string result = File.ReadAllText(fullpath);
+
+            Console.WriteLine(result);
+
+            //using (FileStream fs = File.Open(fullpath, FileMode.OpenOrCreate))
+            //{
+            //    listSerializer.Serialize(fs, listL);
+            //}
+
+
         }
     }
 }

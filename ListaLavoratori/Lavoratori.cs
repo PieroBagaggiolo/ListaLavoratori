@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ListaLavoratori
 {
+    [Serializable]
     enum Genere
     {
         M,
@@ -33,10 +34,8 @@ namespace ListaLavoratori
         public int StipendioMensile { get; set; }
         public int Mensilità { get; set; }
         public int RAL { get; set; }
-        public Lavoratori()
-        {
+        public Lavoratori(){ }
 
-        }
         public virtual int CalcolaAnni(DateTime start)
         {
             return DateTime.Now.Year - start.Year;
@@ -58,12 +57,21 @@ namespace ListaLavoratori
         }
         public DateTime InserisciData()
         {
-            Console.WriteLine("Giorno");
-            int gg = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Mese");
-            int mm = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Anno");
-            int aa = Int32.Parse(Console.ReadLine());
+            int gg = 0, mm = 0, aa = 0;
+            try
+            {
+                Console.WriteLine("Giorno");
+                gg = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Mese");
+                mm = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Anno");
+                aa = Int32.Parse(Console.ReadLine());
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine("Formato non valido, riprova.");
+            }
+            
 
             DateTime data = new DateTime(aa, mm, gg);
             return data;
@@ -121,10 +129,9 @@ namespace ListaLavoratori
             Console.WriteLine("Stipendio Mensile: ");
             worker.StipendioMensile = Int32.Parse(Console.ReadLine());
 
-            Lavoratori lavoratore = new Lavoratori(worker.Nome, worker.Cognome, worker.DataDiNascita, worker.Sesso,worker.Titolo,
-                worker.DataAssunzione, worker.StipendioMensile, worker.Mensilità);
+           
 
-            return lavoratore;
+            return worker;
         }
         public override string ToString()
         {
