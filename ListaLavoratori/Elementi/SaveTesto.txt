@@ -1,0 +1,22 @@
+Nome: Alessio 
+Cognome: Marri 
+Genere: M 
+Età: 18 
+Data di Nascita: 07/08/2001 
+Anni di servizio: 2 
+Data assunzione: 07/02/2017 00:00:00 
+Stipendio Mensile: 1500 
+Mensilità: 13 
+ Tipo di lavoratore Dipendente
+RAL: 19500
+Nome: Nadia 
+Cognome: Cenini 
+Genere: F 
+Età: 38 
+Data di Nascita: 07/05/1981 
+Anni di servizio: 16 
+Data assunzione: 06/03/2003 00:00:00 
+Stipendio Mensile: 1000 
+Mensilità: 12 
+ Tipo di lavoratore Autonomo
+RAL: 12000

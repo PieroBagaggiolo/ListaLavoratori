@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ArrayOfLavoratori xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Lavoratori>
+    <Nome>Alessio</Nome>
+    <Cognome>Marri</Cognome>
+    <Sesso>M</Sesso>
+    <Titolo>DiplomaSuperiore</Titolo>
+    <DataDiNascita>2001-08-07T00:00:00</DataDiNascita>
+    <DataAssunzione>2017-02-07T00:00:00</DataAssunzione>
+    <Età>18</Età>
+    <AnniServizio>2</AnniServizio>
+    <StipendioMensile>1500</StipendioMensile>
+    <Mensilità>13</Mensilità>
+    <Tipo>Dipendente</Tipo>
+    <RAL>19500</RAL>
+  </Lavoratori>
+  <Lavoratori>
+    <Nome>Nadia</Nome>
+    <Cognome>Cenini</Cognome>
+    <Sesso>F</Sesso>
+    <Titolo>Laurea</Titolo>
+    <DataDiNascita>1981-05-07T00:00:00</DataDiNascita>
+    <DataAssunzione>2003-03-06T00:00:00</DataAssunzione>
+    <Età>38</Età>
+    <AnniServizio>16</AnniServizio>
+    <StipendioMensile>1000</StipendioMensile>
+    <Mensilità>12</Mensilità>
+    <Tipo>Autonomo</Tipo>
+    <RAL>12000</RAL>
+  </Lavoratori>
+</ArrayOfLavoratori>

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace ListaLavoratori
 {
     [Serializable]
-    enum Genere
+    public enum Genere
     {
         M,
         F,
         G
     }
-    enum TitoloDiStudio
+    public enum TitoloDiStudio
     {
         LicenzaElementare,
         LicenzaMedia,
@@ -21,7 +21,12 @@ namespace ListaLavoratori
         Laurea,
         Dottorato
     }
-    class Lavoratori
+    public enum Tipologia
+    {
+        Autonomo,
+        Dipendente
+    }
+    public class Lavoratori
     {
         public string Nome { get; set; }
         public string Cognome { get; set; }
@@ -33,6 +38,7 @@ namespace ListaLavoratori
         public int AnniServizio { get; set; }
         public int StipendioMensile { get; set; }
         public int Mensilità { get; set; }
+        public Tipologia Tipo {get; set;}
         public int RAL { get; set; }
         public Lavoratori(){ }
 
@@ -118,16 +124,30 @@ namespace ListaLavoratori
             worker.DataAssunzione = InserisciData();
             Console.WriteLine("Mensilità: ");
             worker.Mensilità = Int32.Parse(Console.ReadLine());
+            if(worker.Mensilità <= 12)
+            {
+                worker.Tipo = Tipologia.Autonomo;
+            }
+            else if(worker.Mensilità>12)
+            {
+                worker.Tipo = Tipologia.Dipendente;
+            }
             Console.WriteLine("Stipendio Mensile: ");
             worker.StipendioMensile = Int32.Parse(Console.ReadLine());
+
+
+            worker.Età = CalcolaAnni(worker.DataDiNascita);
+            worker.AnniServizio = CalcolaAnni(worker.DataAssunzione);
+            worker.RAL = worker.StipendioMensile * worker.Mensilità;
 
             return worker;
         }
         public override string ToString()
         {
-            return string.Format("Nome: {0} \n Cognome: {1} \n Genere: {2} \n Età: {3} \n Data di Nascita: {4:d} \n " +
-                "Anni di servizio: {5} \n Data assunzione: {6} \n Stipendio Mensile: {7} \n Mensilità: {8} \n ",
-                Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità);
+            return string.Format("Nome: {0} \nCognome: {1} \nGenere: {2} \nEtà: {3} \nData di Nascita: {4:d} \n" +
+                "Anni di servizio: {5} \nData assunzione: {6} \nStipendio Mensile: {7} \nMensilità: {8} \n Tipo di lavoratore {9}" +
+                "\nRAL: {10}",
+                Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità, Tipo, RAL);
         }
     }
 }
