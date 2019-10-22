@@ -71,6 +71,31 @@ namespace ListaLavoratori
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
+        public static int UpdatePersona(Lavoratori l)
+        {
+            int result = 0;
+
+            string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, DataDiNascita =  @DataDiNascita, " +
+                "Retribuzione = @Retribuzione, DataAssunzione = @DataAssunzione, Tipo = @Tipo " +
+                "WHERE ID = @Persona_ID";
+
+            SqlCommand cmd = GiveQuery(updateQuery);
+
+            cmd.Parameters.Add("@Nome", SqlDbType.NVarChar, 255).Value = l.Nome;
+            cmd.Parameters.Add("@Cognome", SqlDbType.NVarChar, 255).Value = l.Cognome;
+            cmd.Parameters.Add("@DataDiNascita", SqlDbType.DateTime).Value = l.DataDiNascita;
+            cmd.Parameters.Add("@Retribuzione", SqlDbType.Float).Value = l.RAL;
+            cmd.Parameters.Add("@DataAssunzione", SqlDbType.DateTime).Value = l.DataAssunzione;
+            cmd.Parameters.Add("@Tipo", SqlDbType.Int).Value = l.Tipo;
+
+            //cmd.Parameters.AddWithValue("@Persona_ID", l.);
+
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+
+            return result;
+        }
 
     }
 }
