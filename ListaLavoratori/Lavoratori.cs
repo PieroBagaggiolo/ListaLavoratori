@@ -57,27 +57,19 @@ namespace ListaLavoratori
         }
         public DateTime InserisciData()
         {
-            int gg = 0, mm = 0, aa = 0;
-            try
-            {
-                Console.WriteLine("Giorno");
-                gg = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Mese");
-                mm = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Anno");
-                aa = Int32.Parse(Console.ReadLine());
-            }
-            catch(FormatException ex)
-            {
-                Console.WriteLine("Formato non valido, riprova.");
-            }
-            
+            Console.WriteLine("Giorno");
+            int gg = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Mese");
+            int mm = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Anno");
+            int aa = Int32.Parse(Console.ReadLine());
 
             DateTime data = new DateTime(aa, mm, gg);
             return data;
         }
         public Lavoratori InsertWorker(Lavoratori worker)
         {
+            Console.WriteLine("Inseriscine i dati:");
             int scelta = 0;
             Console.WriteLine("Nome: ");
             worker.Nome = Console.ReadLine();
@@ -128,8 +120,6 @@ namespace ListaLavoratori
             worker.Mensilità = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Stipendio Mensile: ");
             worker.StipendioMensile = Int32.Parse(Console.ReadLine());
-
-           
 
             return worker;
         }
