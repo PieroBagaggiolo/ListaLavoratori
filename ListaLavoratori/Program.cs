@@ -65,6 +65,8 @@ namespace ListaLavoratori
             {
                 lista.Serialize(fs, listL);
             }
+
+            //scrittura su DB
         }
     }
 }
