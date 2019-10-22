@@ -59,10 +59,16 @@ namespace ListaLavoratori
 
             Console.WriteLine(result);
 
-            //using (FileStream fs = File.Open(fullpath, FileMode.OpenOrCreate))
-            //{
-            //    listSerializer.Serialize(fs, listL);
-            //}
+
+            string file2 = "test2.xml";
+            fullpath = Path.Combine(path, file2);
+
+
+            XmlSerializer lista = new XmlSerializer(typeof(List<Lavoratori>));
+            using (FileStream fs = File.Open(fullpath, FileMode.OpenOrCreate))
+            {
+                lista.Serialize(fs, listL);
+            }
 
 
         }
