@@ -36,5 +36,21 @@ namespace ListaLavoratori
 
             return persone;
         }
+
+        public static void GiveQuery(SqlCommand cmd, string query)
+        {
+            cmd = new SqlCommand
+            {
+                Connection = GetConnection(),
+                CommandType = CommandType.Text,
+
+                CommandText = query,
+            };
+        }
+
+        public static void AggiungiLavoratore(Lavoratori l)
+        {
+            DBHelp.GiveQuery(new SqlCommand(), "INSERT INTO");
+        }
     }
 }

@@ -67,6 +67,7 @@ namespace ListaLavoratori
             }
 
             //scrittura su DB
+
         }
     }
 }

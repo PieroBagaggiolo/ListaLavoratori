@@ -145,7 +145,7 @@ namespace ListaLavoratori
         public override string ToString()
         {
             return string.Format("Nome: {0} \nCognome: {1} \nGenere: {2} \nEtà: {3} \nData di Nascita: {4:d} \n" +
-                "Anni di servizio: {5} \nData assunzione: {6} \nStipendio Mensile: {7} \nMensilità: {8} \n Tipo di lavoratore {9}" +
+                "Anni di servizio: {5} \nData assunzione: {6} \nStipendio Mensile: {7} \nMensilità: {8} \nTipo di lavoratore1. {9}" +
                 "\nRAL: {10}",
                 Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità, Tipo, RAL);
         }
