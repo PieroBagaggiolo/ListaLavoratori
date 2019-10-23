@@ -15,11 +15,11 @@ namespace ListaLavoratori
     }
     public enum TitoloDiStudio
     {
-        LicenzaElementare,
-        LicenzaMedia,
-        DiplomaSuperiore,
-        Laurea,
-        Dottorato
+        LicenzaElementare = 0,
+        LicenzaMedia = 1,
+        DiplomaSuperiore = 2,
+        Laurea = 3,
+        Dottorato = 4
     }
     public enum Tipologia
     {

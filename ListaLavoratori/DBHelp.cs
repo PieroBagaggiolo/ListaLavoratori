@@ -70,18 +70,20 @@ namespace ListaLavoratori
         {
             int result = 0;
 
-            string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, DataDiNascita =  @DataDiNascita, " +
-                "StipendioMensile = @Retribuzione, DataAssunzione = @DataAssunzione, Tipo = @Tipo " +
-                "WHERE ID = @Persona_ID";
+            string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, TitoloDiStudio = @TitoloDiStudio, " +
+                "DataDiNascita =  @DataDiNascita, DataAssunzione = @DataAssunzione," +
+                "StipendioMensile = @Retribuzione  " +
+                "WHERE ID = @IDWorker";
 
             SqlCommand cmd = GiveQuery(updateQuery);
 
             cmd.Parameters.Add("@Nome", SqlDbType.NVarChar, 255).Value = l.Nome;
             cmd.Parameters.Add("@Cognome", SqlDbType.NVarChar, 255).Value = l.Cognome;
+            cmd.Parameters.Add("@TitoloDiStudio", SqlDbType.Int) = l.Titolo;
             cmd.Parameters.Add("@DataDiNascita", SqlDbType.DateTime).Value = l.DataDiNascita;
-            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.RAL;
             cmd.Parameters.Add("@DataAssunzione", SqlDbType.DateTime).Value = l.DataAssunzione;
-            cmd.Parameters.Add("@Tipo", SqlDbType.Int).Value = l.Tipo;
+            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.RAL;
+            
 
             cmd.Parameters.AddWithValue("@ID", l.IDWorker);
 
