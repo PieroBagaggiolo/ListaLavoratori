@@ -68,11 +68,36 @@ namespace ListaLavoratori
             }
 
             //scrittura su DB
+            InitDB(listL);
             DataSet ds = DBHelp.GetWorker();
+            Console.WriteLine("Situazione del DB:");
+            StampaConsole(ds);
+            Guid id = new Guid();
+
+            Lavoratori lav = new Lavoratori
+            {
+                IDWorker = id,
+                Nome = "Paola",
+                Cognome = "Marasa",
+                Titolo = TitoloDiStudio.Dottorato,
+                DataDiNascita = new DateTime(1940, 9, 2),
+                DataAssunzione = new DateTime(1977, 3, 17),
+                Tipo = Tipologia.Dipendente,
+                StipendioMensile = 2000
+            };
+
+            DBHelp.EditWorker(lav);
 
         }
 
-        private static void PrintDataSet(DataSet ds)
+        private static void InitDB(List<Lavoratori> l)
+        {
+            foreach(var w in l)
+            {
+                DBHelp.AddWorker(w);
+            }
+        }
+        private static void StampaConsole(DataSet ds)
         {
             DataTable dt = ds.Tables[0];
 

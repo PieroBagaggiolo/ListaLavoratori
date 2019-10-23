@@ -64,6 +64,24 @@ namespace ListaLavoratori
             RAL = StipendioMensile * Mensilità;
             Tasse = CalcolaTasse();
         }
+
+        public Lavoratori(string nome, string cognome, DateTime nascita, Genere genere, TitoloDiStudio titolo, DateTime assunzione,
+            double stipMensile, int mensilità, Guid id)
+        {
+            Nome = nome;
+            Cognome = cognome;
+            DataDiNascita = nascita;
+            DataAssunzione = assunzione;
+            Età = CalcolaAnni(DataDiNascita);
+            AnniServizio = CalcolaAnni(DataAssunzione);
+            Sesso = genere;
+            Titolo = titolo;
+            StipendioMensile = stipMensile;
+            Mensilità = mensilità;
+            RAL = StipendioMensile * Mensilità;
+            Tasse = CalcolaTasse();
+            IDWorker = id;
+        }
         public DateTime InserisciData()
         {
             Console.WriteLine("Giorno");
