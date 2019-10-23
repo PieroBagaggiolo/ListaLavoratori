@@ -88,6 +88,8 @@ namespace ListaLavoratori
 
             DBHelp.EditWorker(lav);
 
+            DBHelp.DeleteWorker(lav);
+
         }
 
         private static void InitDB(List<Lavoratori> l)
