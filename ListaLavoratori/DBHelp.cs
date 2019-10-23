@@ -25,12 +25,15 @@ namespace ListaLavoratori
         public static DataSet GetWorker()
         {
             DataSet persone = new DataSet();
-
-            string selectQuery = "";
+            
+            string selectQuery = "SELECT Nome, Cognome, TitoloDiStudio, " +
+                "DataDiNascita, DataAssunzione, Tipo FROM Lavoratori";
 
             SqlCommand cmd = new SqlCommand(selectQuery, GetConnection());
 
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+            
 
             adapter.Fill(persone);
 
@@ -52,7 +55,9 @@ namespace ListaLavoratori
 
         public static void AddWorker(Lavoratori l)
         {
-            DBHelp.GiveQuery("INSERT INTO");
+            DBHelp.GiveQuery("INSERT INTO Lavoratori" +
+                "(ID, Nome, Cognome, TitoloDiStudio, DataDiNascita, DataAssunzione, StipendioMensile, Mensilità) VALUES" +
+                "(@IDWorker, @Nome, @Cognome, @DataDiNascita, @DataAssunzione, @Tipo)");
 
         }
 

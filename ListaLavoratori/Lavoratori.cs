@@ -194,5 +194,9 @@ namespace ListaLavoratori
 
             return tasse;
         }
+        public int GetMensilità()
+        {
+            return Tipo == Tipologia.Autonomo ? 12 : 13;
+        }
     }
 }
