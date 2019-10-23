@@ -55,9 +55,17 @@ namespace ListaLavoratori
 
         public static void AddWorker(Lavoratori l)
         {
-            DBHelp.GiveQuery("INSERT INTO Lavoratori" +
+            SqlCommand cmd = GiveQuery("INSERT INTO Lavoratori" +
                 "(ID, Nome, Cognome, TitoloDiStudio, DataDiNascita, DataAssunzione, StipendioMensile, Mensilità) VALUES" +
-                "(@IDWorker, @Nome, @Cognome, @DataDiNascita, @DataAssunzione, @Tipo)");
+                "(@IDWorker, @Nome, @Cognome, @DataDiNascita, @DataAssunzione, @StipendioMensile, @Mensilità)");
+
+            cmd.Parameters.Add("@Nome", SqlDbType.NVarChar, 255).Value = l.Nome;
+            cmd.Parameters.Add("@Cognome", SqlDbType.NVarChar, 255).Value = l.Cognome;
+            cmd.Parameters.Add("@Titolo", SqlDbType.Int).Value = l.Titolo;
+            cmd.Parameters.Add("@DataDiNascita", SqlDbType.DateTime).Value = l.DataDiNascita;
+            cmd.Parameters.Add("@DataAssunzione", SqlDbType.DateTime).Value = l.DataAssunzione;
+            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.StipendioMensile;
+            
 
         }
 
@@ -75,19 +83,19 @@ namespace ListaLavoratori
         {
             int result = 0;
 
-            string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, TitoloDiStudio = @TitoloDiStudio, " +
+            string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, TitoloDiStudio = @Titolo, " +
                 "DataDiNascita =  @DataDiNascita, DataAssunzione = @DataAssunzione," +
-                "StipendioMensile = @Retribuzione  " +
+                "StipendioMensile = @StipendioMensile  " +
                 "WHERE ID = @IDWorker";
 
             SqlCommand cmd = GiveQuery(updateQuery);
 
             cmd.Parameters.Add("@Nome", SqlDbType.NVarChar, 255).Value = l.Nome;
             cmd.Parameters.Add("@Cognome", SqlDbType.NVarChar, 255).Value = l.Cognome;
-            cmd.Parameters.Add("@TitoloDiStudio", SqlDbType.Int) = l.Titolo;
+            cmd.Parameters.Add("@Titolo", SqlDbType.Int).Value = l.Titolo;
             cmd.Parameters.Add("@DataDiNascita", SqlDbType.DateTime).Value = l.DataDiNascita;
             cmd.Parameters.Add("@DataAssunzione", SqlDbType.DateTime).Value = l.DataAssunzione;
-            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.RAL;
+            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.StipendioMensile;
             
 
             cmd.Parameters.AddWithValue("@ID", l.IDWorker);
