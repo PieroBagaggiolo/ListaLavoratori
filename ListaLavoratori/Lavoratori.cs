@@ -28,6 +28,7 @@ namespace ListaLavoratori
     }
     public class Lavoratori
     {
+        public Guid IDWorker { get; set; }
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public Genere Sesso{ get; set; }
@@ -36,10 +37,11 @@ namespace ListaLavoratori
         public DateTime DataAssunzione { get; set; }
         public int Età { get; set; }
         public int AnniServizio { get; set; }
-        public int StipendioMensile { get; set; }
+        public double StipendioMensile { get; set; }
         public int Mensilità { get; set; }
         public Tipologia Tipo {get; set;}
-        public int RAL { get; set; }
+        public double RAL { get; set; }
+        public double Tasse { get; set; }
         public Lavoratori(){ }
 
         public virtual int CalcolaAnni(DateTime start)
@@ -47,7 +49,7 @@ namespace ListaLavoratori
             return DateTime.Now.Year - start.Year;
         }
         public Lavoratori(string nome, string cognome, DateTime nascita, Genere genere, TitoloDiStudio titolo, DateTime assunzione, 
-            int stipMensile, int mensilità)
+            double stipMensile, int mensilità)
         {
             Nome = nome;
             Cognome = cognome;
@@ -60,6 +62,7 @@ namespace ListaLavoratori
             StipendioMensile = stipMensile;
             Mensilità = mensilità;
             RAL = StipendioMensile * Mensilità;
+            Tasse = CalcolaTasse();
         }
         public DateTime InserisciData()
         {
@@ -139,15 +142,57 @@ namespace ListaLavoratori
             worker.Età = CalcolaAnni(worker.DataDiNascita);
             worker.AnniServizio = CalcolaAnni(worker.DataAssunzione);
             worker.RAL = worker.StipendioMensile * worker.Mensilità;
-
+            
             return worker;
         }
         public override string ToString()
         {
             return string.Format("Nome: {0} \nCognome: {1} \nGenere: {2} \nEtà: {3} \nData di Nascita: {4:d} \n" +
-                "Anni di servizio: {5} \nData assunzione: {6} \nStipendio Mensile: {7} \nMensilità: {8} \nTipo di lavoratore1. {9}" +
-                "\nRAL: {10}",
-                Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità, Tipo, RAL);
+                "Anni di servizio: {5} \nData assunzione: {6} \nStipendio Mensile: {7} \nMensilità: {8} \nTipo di lavoratore1: {9}" +
+                "\nRAL: {10} \nTasse: {11}",
+                Nome, Cognome, Sesso, Età, DataDiNascita, AnniServizio, DataAssunzione, StipendioMensile, Mensilità, Tipo, RAL, Tasse);
+        }
+        
+        public double CalcolaTasse()
+        {
+            double tasse = 0;
+            if (Tipo == Tipologia.Dipendente)
+            {
+                
+                if (0 < RAL || RAL < 6000)
+                {
+                    tasse = 0;
+                }
+                else if (6000 < RAL || RAL < 15000)
+                {
+                    tasse = RAL / (100 * 15);
+                }
+                else if (15000 < RAL || RAL < 25000)
+                {
+                    tasse = RAL / (100 * 30);
+                }
+                else if (25000 <  RAL ||  RAL <= 35000)
+                {
+                    tasse =  RAL / (100 * 40);
+                }
+                else if ( RAL > 35000)
+                {
+                    tasse =  RAL / (100 * 50);
+                }
+            }
+            else if ( Tipo == Tipologia.Autonomo)
+            {
+                if (RAL < 50000)
+                {
+                    tasse =  RAL / (100 * 15);
+                }
+                else if (RAL >= 500000)
+                {
+                    tasse =  RAL / (100 * 30);
+                }
+            }
+
+            return tasse;
         }
     }
 }

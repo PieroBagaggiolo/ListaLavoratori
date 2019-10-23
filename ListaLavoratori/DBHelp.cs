@@ -50,7 +50,7 @@ namespace ListaLavoratori
             return cmd;
         }
 
-        public static void AggiungiLavoratore(Lavoratori l)
+        public static void AddWorker(Lavoratori l)
         {
             DBHelp.GiveQuery("INSERT INTO");
 
@@ -60,23 +60,18 @@ namespace ListaLavoratori
         {
             string deleteQuery = string.Format("DELETE FROM {0}", tabella);
 
-            SqlCommand cmd = new SqlCommand
-            {
-                Connection = GetConnection(),
-                CommandType = CommandType.Text,
-                CommandText = deleteQuery,
-            };
+            SqlCommand cmd = DBHelp.GiveQuery(deleteQuery);
 
             cmd.Connection.Open();
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
-        public static int UpdatePersona(Lavoratori l)
+        public static int EditWorker(Lavoratori l)
         {
             int result = 0;
 
             string updateQuery = "UPDATE  SET Nome = @Nome, Cognome = @Cognome, DataDiNascita =  @DataDiNascita, " +
-                "Retribuzione = @Retribuzione, DataAssunzione = @DataAssunzione, Tipo = @Tipo " +
+                "StipendioMensile = @Retribuzione, DataAssunzione = @DataAssunzione, Tipo = @Tipo " +
                 "WHERE ID = @Persona_ID";
 
             SqlCommand cmd = GiveQuery(updateQuery);
@@ -84,11 +79,27 @@ namespace ListaLavoratori
             cmd.Parameters.Add("@Nome", SqlDbType.NVarChar, 255).Value = l.Nome;
             cmd.Parameters.Add("@Cognome", SqlDbType.NVarChar, 255).Value = l.Cognome;
             cmd.Parameters.Add("@DataDiNascita", SqlDbType.DateTime).Value = l.DataDiNascita;
-            cmd.Parameters.Add("@Retribuzione", SqlDbType.Float).Value = l.RAL;
+            cmd.Parameters.Add("@StipendioMensile", SqlDbType.Float).Value = l.RAL;
             cmd.Parameters.Add("@DataAssunzione", SqlDbType.DateTime).Value = l.DataAssunzione;
             cmd.Parameters.Add("@Tipo", SqlDbType.Int).Value = l.Tipo;
 
-            //cmd.Parameters.AddWithValue("@Persona_ID", l.);
+            cmd.Parameters.AddWithValue("@ID", l.IDWorker);
+
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+
+            return result;
+        }
+
+        public static int DeleteWorker(Lavoratori l)
+        {
+            int result = 0;
+            string deleteQuery = "DELETE FROM Lavoratori WHERE ID = @Persona_ID";
+
+            SqlCommand cmd = GiveQuery(deleteQuery);
+            
+            cmd.Parameters.AddWithValue("@ID",l.IDWorker);
 
             cmd.Connection.Open();
             cmd.ExecuteNonQuery();
