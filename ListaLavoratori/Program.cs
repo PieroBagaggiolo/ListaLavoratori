@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
@@ -67,7 +68,18 @@ namespace ListaLavoratori
             }
 
             //scrittura su DB
+            DataSet ds = DBHelp.GetWorker();
 
+        }
+
+        private static void PrintDataSet(DataSet ds)
+        {
+            DataTable dt = ds.Tables[0];
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}", row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
+            }
         }
     }
 }
